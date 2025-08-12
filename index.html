@@ -19,28 +19,32 @@
       text-align: center;
     }
     button {
-      padding: 10px 20px;
+      padding: 12px 24px;
       font-size: 1rem;
       cursor: pointer;
       margin-top: 20px;
+      border: none;
+      background-color: #317EFB;
+      color: white;
+      border-radius: 6px;
+    }
+    button:hover {
+      background-color: #255bb5;
     }
   </style>
 </head>
 <body>
   <h1>Install Help Scout PWA</h1>
-  <p>You can install this app to your home screen.<br>
-     Redirecting automatically in 5 seconds...</p>
-  <button id="redirectNow">Go to Help Scout Now</button>
+  <p>Use your browser’s “Add to Home Screen” option to install.<br>
+     When ready, tap below to launch Help Scout.</p>
+  <button id="redirectNow">Launch Help Scout</button>
 
   <script>
     const goToHelpScout = () => {
       window.location.replace("https://secure.helpscout.net/#/whats-next");
     };
 
-    // Redirect after 5 seconds
-    setTimeout(goToHelpScout, 5000);
-
-    // Or let user click manually
+    // Only redirect when button clicked
     document.getElementById('redirectNow').addEventListener('click', goToHelpScout);
 
     // Register service worker
