@@ -35,16 +35,21 @@
 </head>
 <body>
   <h1>Install Help Scout PWA</h1>
-  <p>Use your browser’s “Add to Home Screen” option to install.<br>
-     When ready, tap below to launch Help Scout.</p>
-  <button id="redirectNow">Launch Help Scout</button>
+  <p>
+    Use your browser’s “Add to Home Screen” option to install.<br>
+    This page will redirect automatically in <strong>90 seconds</strong>, or you can launch manually.
+  </p>
+  <button id="redirectNow">Launch Help Scout Now</button>
 
   <script>
     const goToHelpScout = () => {
       window.location.replace("https://secure.helpscout.net/#/whats-next");
     };
 
-    // Only redirect when button clicked
+    // Auto redirect after 90 seconds (90000 ms)
+    setTimeout(goToHelpScout, 90000);
+
+    // Allow manual launch anytime
     document.getElementById('redirectNow').addEventListener('click', goToHelpScout);
 
     // Register service worker
