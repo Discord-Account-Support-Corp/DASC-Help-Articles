@@ -6,14 +6,32 @@
   <title>Help Scout Dashboard</title>
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#317EFB"/>
+  <style>
+    body { margin: 0; font-family: sans-serif; text-align: center; }
+    #fallback { display: none; padding: 2em; }
+    iframe { width: 100%; height: 100vh; border: none; }
+  </style>
 </head>
 <body>
-  <h1>Loading Help Scout...</h1>
-  <iframe 
-    src="https://secure.helpscout.net/#/whats-next" 
-    style="width:100%; height:100vh; border:none;">
-  </iframe>
+  <iframe id="hs-frame" src="https://secure.helpscout.net/#/whats-next"></iframe>
+  <div id="fallback">
+    <h1>Help Scout Dashboard</h1>
+    <p>If you are not redirected automatically, <a href="https://secure.helpscout.net/#/whats-next" target="_blank">click here</a>.</p>
+  </div>
+
   <script>
+    // If iframe fails to load within 3 seconds, show fallback
+    const timer = setTimeout(() => {
+      document.getElementById('hs-frame').style.display = 'none';
+      document.getElementById('fallback').style.display = 'block';
+    }, 3000);
+
+    // If iframe loads successfully, cancel the fallback
+    document.getElementById('hs-frame').addEventListener('load', () => {
+      clearTimeout(timer);
+    });
+
+    // Register service worker
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('service-worker.js');
     }
