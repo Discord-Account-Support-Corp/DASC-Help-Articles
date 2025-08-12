@@ -1,7 +1,7 @@
 {
   "name": "Help Scout Dashboard",
   "short_name": "HelpScout",
-  "start_url": ".",
+  "start_url": "https://secure.helpscout.net/#/whats-next",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#317EFB",
