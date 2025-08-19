@@ -41,16 +41,21 @@
 </head>
 <body>
   <h1>Help Scout PWA</h1>
-  <p>Tap below to launch your Help Scout dashboard inside this PWA.</p>
-  <button id="launch">🚀 Launch Help Scout</button>
+  <p>You have 100 seconds to add this app to your Home Screen before redirecting.</p>
+  <button id="launch">🚀 Go Now</button>
 
   <script>
-    document.getElementById('launch').addEventListener('click', () => {
-      // Always stays in the PWA shell
-      window.location.href = "https://secure.helpscout.net/#/whats-next";
-    });
+    const goToHelpScout = () => {
+      window.location.replace("https://secure.helpscout.net/#/whats-next");
+    };
 
-    // Register service worker for installability
+    // Auto-redirect after 100 seconds
+    setTimeout(goToHelpScout, 100000);
+
+    // Manual button for early launch
+    document.getElementById('launch').addEventListener('click', goToHelpScout);
+
+    // Register service worker
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('service-worker.js');
     }
