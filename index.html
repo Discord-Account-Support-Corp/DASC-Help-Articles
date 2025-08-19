@@ -18,47 +18,39 @@
       background: #f9f9f9;
       text-align: center;
     }
-    a, button {
-      margin-top: 20px;
+    h1 {
+      margin-bottom: 10px;
+    }
+    p {
+      margin: 0 0 20px 0;
+    }
+    button {
       padding: 12px 24px;
       font-size: 1rem;
-      text-decoration: none;
+      cursor: pointer;
       border: none;
       background-color: #317EFB;
       color: white;
       border-radius: 6px;
-      cursor: pointer;
+      transition: background 0.2s ease-in-out;
     }
-    a:hover, button:hover {
+    button:hover {
       background-color: #255bb5;
-    }
-    #fallback {
-      display: none;
     }
   </style>
 </head>
 <body>
-  <h1>Launching Help Scout…</h1>
-  <p>If this page doesn’t redirect automatically, use the button below.</p>
-
-  <div id="fallback">
-    <a href="https://secure.helpscout.net/#/whats-next" target="_self">Go to Help Scout</a>
-  </div>
+  <h1>Help Scout PWA</h1>
+  <p>Tap below to launch your Help Scout dashboard inside this PWA.</p>
+  <button id="launch">🚀 Launch Help Scout</button>
 
   <script>
-    const goToHelpScout = () => {
-      window.location.replace("https://secure.helpscout.net/#/whats-next");
-    };
+    document.getElementById('launch').addEventListener('click', () => {
+      // Always stays in the PWA shell
+      window.location.href = "https://secure.helpscout.net/#/whats-next";
+    });
 
-    // Try redirect after 2 seconds
-    setTimeout(goToHelpScout, 2000);
-
-    // Show fallback button if redirect still not done after 5 seconds
-    setTimeout(() => {
-      document.getElementById('fallback').style.display = 'block';
-    }, 5000);
-
-    // Register service worker
+    // Register service worker for installability
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('service-worker.js');
     }
