@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Help Scout PWA Launcher</title>
+  <title>Help Scout PWA</title>
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#317EFB"/>
   <style>
@@ -18,39 +18,45 @@
       background: #f9f9f9;
       text-align: center;
     }
-    button {
+    a, button {
+      margin-top: 20px;
       padding: 12px 24px;
       font-size: 1rem;
-      cursor: pointer;
-      margin-top: 20px;
+      text-decoration: none;
       border: none;
       background-color: #317EFB;
       color: white;
       border-radius: 6px;
+      cursor: pointer;
     }
-    button:hover {
+    a:hover, button:hover {
       background-color: #255bb5;
+    }
+    #fallback {
+      display: none;
     }
   </style>
 </head>
 <body>
-  <h1>Install Help Scout PWA</h1>
-  <p>
-    Use your browser’s “Add to Home Screen” option to install.<br>
-    This page will redirect automatically in <strong>90 seconds</strong>, or you can launch manually.
-  </p>
-  <button id="redirectNow">Launch Help Scout Now</button>
+  <h1>Launching Help Scout…</h1>
+  <p>If this page doesn’t redirect automatically, use the button below.</p>
+
+  <div id="fallback">
+    <a href="https://secure.helpscout.net/#/whats-next" target="_self">Go to Help Scout</a>
+  </div>
 
   <script>
     const goToHelpScout = () => {
       window.location.replace("https://secure.helpscout.net/#/whats-next");
     };
 
-    // Auto redirect after 90 seconds (90000 ms)
-    setTimeout(goToHelpScout, 90000);
+    // Try redirect after 2 seconds
+    setTimeout(goToHelpScout, 2000);
 
-    // Allow manual launch anytime
-    document.getElementById('redirectNow').addEventListener('click', goToHelpScout);
+    // Show fallback button if redirect still not done after 5 seconds
+    setTimeout(() => {
+      document.getElementById('fallback').style.display = 'block';
+    }, 5000);
 
     // Register service worker
     if ('serviceWorker' in navigator) {
