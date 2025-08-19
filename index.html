@@ -18,12 +18,8 @@
       background: #f9f9f9;
       text-align: center;
     }
-    h1 {
-      margin-bottom: 10px;
-    }
-    p {
-      margin: 0 0 20px 0;
-    }
+    h1 { margin-bottom: 10px; }
+    p { margin: 0 0 20px 0; font-size: 1.1rem; }
     button {
       padding: 12px 24px;
       font-size: 1rem;
@@ -34,23 +30,32 @@
       border-radius: 6px;
       transition: background 0.2s ease-in-out;
     }
-    button:hover {
-      background-color: #255bb5;
-    }
+    button:hover { background-color: #255bb5; }
   </style>
 </head>
 <body>
   <h1>Help Scout PWA</h1>
-  <p>You have 100 seconds to add this app to your Home Screen before redirecting.</p>
-  <button id="launch">🚀 Go Now</button>
+  <p id="countdown">Redirecting in 100 seconds...</p>
+  <button id="launch">🚀 Launch Now</button>
 
   <script>
+    const redirectDelay = 100; // seconds
+    let remaining = redirectDelay;
+
     const goToHelpScout = () => {
       window.location.replace("https://secure.helpscout.net/#/whats-next");
     };
 
-    // Auto-redirect after 100 seconds
-    setTimeout(goToHelpScout, 100000);
+    // Countdown display
+    const countdownEl = document.getElementById('countdown');
+    const timer = setInterval(() => {
+      remaining--;
+      countdownEl.textContent = `Redirecting in ${remaining} seconds...`;
+      if (remaining <= 0) {
+        clearInterval(timer);
+        goToHelpScout();
+      }
+    }, 1000);
 
     // Manual button for early launch
     document.getElementById('launch').addEventListener('click', goToHelpScout);
