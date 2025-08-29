@@ -20,9 +20,11 @@
     }
     h1 { margin-bottom: 10px; }
     p { margin: 0 0 20px 0; font-size: 1.1rem; }
-    button {
+    a, button {
+      display: inline-block;
       padding: 12px 24px;
       font-size: 1rem;
+      text-decoration: none;
       cursor: pointer;
       border: none;
       background-color: #317EFB;
@@ -30,13 +32,15 @@
       border-radius: 6px;
       transition: background 0.2s ease-in-out;
     }
-    button:hover { background-color: #255bb5; }
+    a:hover, button:hover { background-color: #255bb5; }
   </style>
 </head>
 <body>
-  <h1>Help Scout PWA</h1>
-  <p id="countdown">Redirecting in 100 seconds...</p>
-  <button id="launch">🚀 Launch Now</button>
+  <h1>Help Scout Dashboard</h1>
+  <p id="countdown">Redirecting in 100 seconds…</p>
+  <a id="manualLink" href="https://secure.helpscout.net/#/whats-next">
+    🚀 If not redirected, click here
+  </a>
 
   <script>
     const redirectDelay = 100; // seconds
@@ -50,15 +54,12 @@
     const countdownEl = document.getElementById('countdown');
     const timer = setInterval(() => {
       remaining--;
-      countdownEl.textContent = `Redirecting in ${remaining} seconds...`;
+      countdownEl.textContent = `Redirecting in ${remaining} seconds…`;
       if (remaining <= 0) {
         clearInterval(timer);
         goToHelpScout();
       }
     }, 1000);
-
-    // Manual button for early launch
-    document.getElementById('launch').addEventListener('click', goToHelpScout);
 
     // Register service worker
     if ('serviceWorker' in navigator) {
