@@ -4,11 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Help Scout PWA</title>
+
+  <!-- Manifest and Theme -->
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#317EFB"/>
+
   <style>
     body {
-      font-family: sans-serif;
+      font-family: system-ui, sans-serif;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -18,8 +21,8 @@
       background: #f9f9f9;
       text-align: center;
     }
-    h1 { margin-bottom: 10px; }
-    p { margin: 0 0 20px 0; font-size: 1.1rem; }
+    h1 { margin-bottom: 0.5em; }
+    p { margin-bottom: 1em; }
     a, button {
       display: inline-block;
       padding: 12px 24px;
@@ -28,36 +31,31 @@
       cursor: pointer;
       border: none;
       background-color: #317EFB;
-      color: white;
+      color: #fff;
       border-radius: 6px;
-      transition: background 0.2s ease-in-out;
+      transition: background 0.2s;
     }
     a:hover, button:hover { background-color: #255bb5; }
   </style>
 </head>
 <body>
   <h1>Help Scout Dashboard</h1>
-  <p id="countdown">Redirecting in 100 seconds…</p>
+  <p id="countdown">Redirecting in 60 seconds…</p>
   <a id="manualLink" href="https://secure.helpscout.net/#/whats-next">
-    🚀 If not redirected, click here
+    🚀 Click here if not redirected
   </a>
 
   <script>
-    const redirectDelay = 100; // seconds
-    let remaining = redirectDelay;
+    const delay = 60; // seconds before auto redirect
+    let remaining = delay;
 
-    const goToHelpScout = () => {
-      window.location.replace("https://secure.helpscout.net/#/whats-next");
-    };
-
-    // Countdown display
     const countdownEl = document.getElementById('countdown');
     const timer = setInterval(() => {
       remaining--;
       countdownEl.textContent = `Redirecting in ${remaining} seconds…`;
       if (remaining <= 0) {
         clearInterval(timer);
-        goToHelpScout();
+        window.location.replace('https://secure.helpscout.net/#/whats-next');
       }
     }, 1000);
 
